@@ -1,8 +1,33 @@
-@for (post of posts; track $index) {
-{{ post.title }}<br>
-{{post.author}}<br>
-{{post.message}}<br>
-}
+<div class="flex flex-column align-items-center min-h-screen h-full w-full px-2 py-4 bg-primary-reverse">
+    <img class="h-8rem w-8rem border-circle" src="assets/images/selfie.jpeg" alt="photo">
+    <p class="varela-round text-3xl mt-2">The Bertdey Gurl</p>
+    <p class="varela-round text-lg mt-1">April 20, 2024</p>
+    <p-button label="Add a new post" icon="pi pi-plus" class="my-2 sm:my-3"></p-button>
+    <hr class="border-primary-400 w-full">
+    <div class="w-full grid">
+        @for (post of posts; track $index) {
+        <div class="col-12 sm:col-6 md:col-4 lg:col-3">
+            <div class="bg-white border-round p-2 h-full">
+                <p-header class="flex">
+                    <div class="flex flex-column">
+                        <p class="px-2 py-2 text-xl varela-round text-primary-800">{{ post.title }}</p>
+                        <p class="px-2 pb-2 varela-round text-gray-500">{{ post.author }}</p>
+                    </div>
 
-<br>
-<p-button label="Submit"></p-button>
+                    <div class="w-full flex flex-grow-1 justify-content-end">
+                        <p-button icon="pi pi-trash"></p-button>
+                    </div>
+                </p-header>
+                <p class="px-2 pb-2 text-lg varela-round text-primary-800 flex flex-grow-1">{{ post.message }}</p>
+
+            </div>
+
+        </div>
+        }
+    </div>
+</div>
+
+
+
+<!-- <br>
+<p-button label="Submit"></p-button> -->

@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { FirebaseService } from '../service/firebase.service';
 import { Post } from '../model/post';
+import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-posts',
   standalone: true,
-  imports: [ButtonModule],
+  imports: [ButtonModule, CardModule],
   templateUrl: './posts.component.html',
   styleUrl: './posts.component.css'
 })
