@@ -1,33 +1,40 @@
 <div class="flex flex-column align-items-center min-h-screen h-full w-full px-2 py-4 bg-primary-reverse">
-    <img class="h-8rem w-8rem border-circle" src="assets/images/selfie.jpeg" alt="photo">
+    <img class="h-12rem w-10rem md:h-14rem md:h-13rem border-circle" src="assets/images/photo.jpeg" alt="photo">
     <p class="varela-round text-3xl mt-2">The Bertdey Gurl</p>
     <p class="varela-round text-lg mt-1">April 20, 2024</p>
-    <p-button label="Add a new post" icon="pi pi-plus" class="my-2 sm:my-3"></p-button>
+    <p-button label="Add a new post" icon="pi pi-plus" class="my-2 sm:my-3" (onClick)="showAddPost()"></p-button>
     <hr class="border-primary-400 w-full">
     <div class="w-full grid">
         @for (post of posts; track $index) {
         <div class="col-12 sm:col-6 md:col-4 lg:col-3">
             <div class="bg-white border-round p-2 h-full">
                 <p-header class="flex">
-                    <div class="flex flex-column">
+                    <div class="flex flex-column flex-grow-1">
                         <p class="px-2 py-2 text-xl varela-round text-primary-800">{{ post.title }}</p>
                         <p class="px-2 pb-2 varela-round text-gray-500">{{ post.author }}</p>
                     </div>
-
-                    <div class="w-full flex flex-grow-1 justify-content-end">
-                        <p-button icon="pi pi-trash"></p-button>
+                    <div class="flex flex-shrink-1 justify-content-end">
+                        <p-button icon="pi pi-trash" (onClick)="deletePost(post.id!)"></p-button>
                     </div>
                 </p-header>
-                <p class="px-2 pb-2 text-lg varela-round text-primary-800 flex flex-grow-1">{{ post.message }}</p>
-
+                <p class="px-2 pb-2 text-lg varela-round text-primary-800 flex">{{ post.message }}</p>
             </div>
-
         </div>
+        } @empty {
+            <p class="font-bold p-2">Oops.. Empty..</p>
         }
     </div>
 </div>
 
+<p-dialog [(visible)]="addPostVisible" [modal]="true" header="Add Post">
+    <div class="flex flex-column">
+        <p class="px-2 py-2 text-xl varela-round text-primary-800">Name of Poster</p>
+        <input type="text" pInputText [(ngModel)]="author" />
+        <p class="px-2 py-2 text-xl varela-round text-primary-800">Title</p>
+        <input type="text" pInputText [(ngModel)]="title" />
+        <p class="px-2 py-2 text-xl varela-round text-primary-800">Message</p>
+        <textarea rows="5" cols="30" pInputTextarea [(ngModel)]="message"></textarea>
+        <p-button label="Submit" icon="pi pi-plus" class="pt-2 align-self-center" (onClick)="addPost()"></p-button>
+    </div>
 
-
-<!-- <br>
-<p-button label="Submit"></p-button> -->
+</p-dialog>
